@@ -1,0 +1,31 @@
+@model LoanApp.Models.LoanViewModel
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Loan Details</title>
+</head>
+<body>
+<form asp-action="Store" method="post">
+    <h2>Loan Details</h2>
+    <p>@ViewData["Id"]  --- </p>
+    <input type="hidden" asp-for="UserId" value="@ViewData["Id"]">
+    <div class="mt-3">
+        <label asp-for="AmountCollected">Loan Amount: </label>
+        <input type="text" asp-for="AmountCollected" placeholder="How much do you want to loan" class="form-control">
+    </div>
+    <div class="mt-3">
+        <label asp-for="Tenure">Tenure: </label>
+        <input type="number" asp-for="Tenure">
+    </div>
+    
+    <div class="mt-3">
+        <button type="submit" class="btn btn-outline-secondary">Submit</button>
+    </div>
+</form>
+</body>
+</html>

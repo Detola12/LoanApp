@@ -1,0 +1,20 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model LoanApp.Views.User.Login
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+</head>
+<body>
+<form action="" method="post">
+    <label asp-for="Email">Email</label>
+    <input type="text" class="form-control" asp-for="Email">
+    <span asp-validation-for="Email" class="text-danger"></span>
+    <button type="submit" class="btn">Submit</button>
+</form>
+</body>
+</html>
