@@ -1,10 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace LoanApp.Views.User;
+namespace LoanApp.Models;
 
-public class Login : PageModel
+public class LoginViewModel
 {
     [EmailAddress]
     [Required]
@@ -14,14 +13,5 @@ public class Login : PageModel
     [BindProperty]
     [Required]
     public string Password { get; set; }
-    
-    public void OnGet()
-    {
-        
-    }
 
-    public void OnPost()
-    {
-        
-    }
 }

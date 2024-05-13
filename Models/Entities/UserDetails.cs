@@ -15,6 +15,10 @@ public class UserDetails
     [StringLength(50)]
     public string LastName { get; set; }
     
+    [Required]
+    [StringLength(12)]
+    public string PhoneNumber { get; set; }
+    
     [EmailAddress]
     [Required]
     [StringLength(70)]
@@ -27,6 +31,10 @@ public class UserDetails
     [Required]
     [StringLength(15)]
     public string BVN { get; set; }
+    [Required]
+    [MinLength(6)]
+    [StringLength(25)]
+    public string Password { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime ModifiedAt { get; set; }
     

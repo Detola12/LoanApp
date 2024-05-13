@@ -1,8 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var AuthId = Accessor.HttpContext.Session.GetInt32("AuthId");
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center  w-100" style="margin-top:200px">
+    <h1 class="display-4 fw-light">Welcome to my Loan App</h1>
+    <p class="fw-light fs-4">Register and Get your Loan</p>
+    <div class=" d-flex justify-content-center">
+        <a asp-controller="User" asp-action="Register" class="btn btn-secondary me-4">Register</a>
+        <a asp-controller="User" asp-action="Login" class="btn btn-outline-secondary">Login</a>
+    </div>
 </div>

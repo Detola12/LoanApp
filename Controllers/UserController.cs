@@ -12,28 +12,50 @@ public class UserController : Controller
 {
     // GET
     private readonly LoanContext _context;
+    private readonly IHttpContextAccessor _accessor;
 
-    public UserController(LoanContext context)
+    public UserController(LoanContext context, IHttpContextAccessor accessor)
     {
         this._context = context;
+        _accessor = accessor;
     }
 
     [HttpGet]
     public IActionResult Login()
     {
+        if (_accessor.HttpContext.Session.GetInt32("AuthId").HasValue)
+        {
+            return RedirectToAction("Index", "Home");
+        }
         return View();
     }
 
-    // [HttpPost]
-    // public IActionResult Validate(Login login)
-    // {
-    //     
-    //     
-    // }
+    [HttpPost]
+    public IActionResult Validate(LoginViewModel login)
+    {
+        if (ModelState.IsValid)
+        {
+            var AuthUser = _context.Users.FirstOrDefault(x => x.Email == login.Email && x.Password == login.Password);
+            if (AuthUser != null)
+            {
+                Console.WriteLine("Yes");
+                _accessor.HttpContext.Session.SetInt32("AuthId", AuthUser.Id);
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View("Login");
+        }
+        return View("Login");
+        
+    }
 
     [HttpGet]
     public IActionResult Register()
     {
+        if (_accessor.HttpContext.Session.GetInt32("AuthId").HasValue)
+        {
+            return RedirectToAction("Index", "Home");
+        }
         return View();
     }
 
@@ -48,16 +70,21 @@ public class UserController : Controller
                 LastName = userModel.LastName,
                 Age = userModel.Age,
                 Email = userModel.Email,
+                PhoneNumber = userModel.Phone,
+                Password = userModel.Password,
                 BVN = userModel.BVN,
                 Address = userModel.Address,
                 CreatedAt = DateTime.Now,
                 ModifiedAt = DateTime.Now
             };
-
+                
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             var tempUser = _context.Users.FirstOrDefault(x => x.Email == userModel.Email);
             var tempId = tempUser.Id;
+            // HttpContext.Session.SetString("AuthFirstName", user.FirstName);
+            // HttpContext.Session.SetString("AuthLastName", user.LastName);
+            // HttpContext.Session.SetInt32("AuthId", tempId);
             return RedirectToAction("Index", "Loan", new { Id = tempId });
         }
         else

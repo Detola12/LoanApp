@@ -124,3 +124,4 @@ C:\Users\adeto\RiderProjects\LoanApp\obj\Debug\net8.0\refint\LoanApp.dll
 C:\Users\adeto\RiderProjects\LoanApp\obj\Debug\net8.0\LoanApp.pdb
 C:\Users\adeto\RiderProjects\LoanApp\obj\Debug\net8.0\LoanApp.genruntimeconfig.cache
 C:\Users\adeto\RiderProjects\LoanApp\obj\Debug\net8.0\ref\LoanApp.dll
+C:\Users\adeto\RiderProjects\LoanApp\obj\Debug\net8.0\LoanApp.sourcelink.json

@@ -8,6 +8,14 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<LoanContext>(options => options.UseMySQL(
     builder.Configuration.GetConnectionString("LoanDb")));
 
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(1);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,6 +32,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
