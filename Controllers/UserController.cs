@@ -20,6 +20,11 @@ public class UserController : Controller
         _accessor = accessor;
     }
 
+    public IActionResult DashBoard()
+    {
+        return View();
+    }
+
     [HttpGet]
     public IActionResult Login()
     {
@@ -38,8 +43,8 @@ public class UserController : Controller
             var AuthUser = _context.Users.FirstOrDefault(x => x.Email == login.Email && x.Password == login.Password);
             if (AuthUser != null)
             {
-                Console.WriteLine("Yes");
                 _accessor.HttpContext.Session.SetInt32("AuthId", AuthUser.Id);
+                _accessor.HttpContext.Session.SetString("AuthName", AuthUser.FirstName + " " + AuthUser.LastName);
                 return RedirectToAction("Index", "Home");
             }
 
@@ -85,10 +90,17 @@ public class UserController : Controller
             // HttpContext.Session.SetString("AuthFirstName", user.FirstName);
             // HttpContext.Session.SetString("AuthLastName", user.LastName);
             // HttpContext.Session.SetInt32("AuthId", tempId);
-            return RedirectToAction("Index", "Loan", new { Id = tempId });
+            if (!_accessor.HttpContext.Session.GetInt32("AuthId").HasValue)
+            {
+                _accessor.HttpContext.Session.SetInt32("AuthId", tempId);
+                _accessor.HttpContext.Session.SetString("AuthName", user.FirstName + " " + user.LastName);
+            }
+            
+            return RedirectToAction("Index", "Loan");
         }
         else
         {
+            ModelState.AddModelError("Error", "Something Went Wrong");
             return View();
         }
 

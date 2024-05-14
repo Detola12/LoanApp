@@ -13,9 +13,8 @@ public class LoanController : Controller
         _context = context;
     }
     // GET
-    public IActionResult Index(int Id)
+    public IActionResult Index()
     {
-        ViewData["Id"] = Id;
         return View();
     }
 
@@ -36,7 +35,7 @@ public class LoanController : Controller
 
         _context.Loan.Add(loandetail);
         await _context.SaveChangesAsync();
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("DashBoard", "User");
     }
     
 }

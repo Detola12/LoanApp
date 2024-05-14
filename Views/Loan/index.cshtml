@@ -11,9 +11,9 @@
 </head>
 <body>
 <form asp-action="Store" method="post">
-    <h2>Loan Details</h2>
-    <p>@ViewData["Id"]  --- </p>
-    <input type="hidden" asp-for="UserId" value="@ViewData["Id"]">
+    <h2>Loan Application</h2>
+    
+    <input type="hidden" asp-for="UserId" value="@Accessor.HttpContext.Session.GetInt32("AuthId")">
     <div class="mt-3">
         <label asp-for="AmountCollected">Loan Amount: </label>
         <input type="text" asp-for="AmountCollected" placeholder="How much do you want to loan" class="form-control">
